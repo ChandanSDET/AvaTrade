@@ -4,12 +4,6 @@ import com.avatrade.pages.CreateAccountPage;
 import com.avatrade.pages.DashboardPage;
 import com.avatrade.pages.LoginPage;
 
-import com.avatrade.util.BrowserUtil;
-import com.avatrade.util.PropertiesFileUtil;
-import com.fasterxml.jackson.databind.JsonSerializable;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

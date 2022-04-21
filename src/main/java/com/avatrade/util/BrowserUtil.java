@@ -13,9 +13,9 @@ import java.util.List;
 
 public class BrowserUtil {
 
-    WebDriver driver;
-    Actions actions;
-    WebDriverWait wait;
+    protected WebDriver driver;
+    protected Actions actions;
+    protected WebDriverWait wait;
 
     public BrowserUtil(WebDriver driver){
         this.driver = driver;

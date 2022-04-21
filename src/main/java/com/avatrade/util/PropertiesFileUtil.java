@@ -6,9 +6,9 @@ import java.util.Properties;
 
 public class PropertiesFileUtil {
 
-    Properties configProp ;
+    Properties configProp;
 
-    public PropertiesFileUtil(){
+    public PropertiesFileUtil() {
         InputStream in = this.getClass().getClassLoader().getResourceAsStream("conf.properties");
         try {
             configProp = new Properties();
@@ -18,7 +18,7 @@ public class PropertiesFileUtil {
         }
     }
 
-    public String getProperty(String key){
+    public String getProperty(String key) {
         return configProp.getProperty(key);
     }
 

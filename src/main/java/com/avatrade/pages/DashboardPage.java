@@ -2,7 +2,6 @@ package com.avatrade.pages;
 
 import com.avatrade.util.BrowserUtil;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -74,7 +73,7 @@ public class DashboardPage extends BrowserUtil {
     }
 
     public void clickFirstItemOnDashboard(){
-        String currentCurrencyInUrl = getCurrentUrl().substring(driver.getCurrentUrl().lastIndexOf("/") + 1);
+        String currentCurrencyInUrl = getCurrentUrl().substring(getCurrentUrl().lastIndexOf("/") + 1);
         waitForElementToBeClickable(firstItemOnDashboard(currentCurrencyInUrl));
         element(firstItemOnDashboard(currentCurrencyInUrl)).click();
     }

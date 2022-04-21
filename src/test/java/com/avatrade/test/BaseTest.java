@@ -15,15 +15,15 @@ public class BaseTest {
     @BeforeMethod
     public void initClass() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        BrowserUtil browserUtil = new BrowserUtil(driver);
+        this.driver = new ChromeDriver();
+        BrowserUtil browserUtil = new BrowserUtil(this.driver);
         PropertiesFileUtil properties = new PropertiesFileUtil();
         browserUtil.maximizeBrowser();
-        driver.get(properties.getProperty("applicationUrl"));
+        this.driver.get(properties.getProperty("applicationUrl"));
     }
 
     @AfterMethod
     public void teardown() {
-      driver.quit();
+      this.driver.quit();
     }
 }
