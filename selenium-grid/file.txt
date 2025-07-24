@@ -1,0 +1,57 @@
+to scale the browser from command line without touching .yaml file
+
+>>> docker-compose up --scale chrome=3 -d
+>>> docker-compose up --scale chrome=3 --scale firefox=3 -d
+
+
+to increase max session per container , we have to add below two properties
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+      - SE_NODE_MAX_SESSIONS=3
+
+Password to see the video in grid is: secret
+Also we can disable the password by using below property
+    - SE_VNC_NO_PASSWORD=1
+
+command to create an external node to existing hub
+>>>> java -jar selenium-server-4.34.0.jar node --hub hhp://localhost:4444
+
+command to trigger the test after packaging the whole project in target folder
+>>>>  java -cp "libs/*" org.testng.TestNG testng.xml
+
+how to pass the thread count in the above command
+>>>> java -cp "libs/*" org.testng.TestNG -threadcount 2 testng.xml
+
+command to package the script
+>>>> mvn clean package -DskipTests
+
+command to pass the browser from command line
+>>>> java -Dbrowser=chrome -cp "libs/*" org.testng.TestNG -threadcount 2 testng.xml
+>>>> java -Dbrowser=chrome -Dselenium.grid.enabled=false -cp "libs/*" org.testng.TestNG -threadcount 2 testng.xml
+
+command to create docker image (run this below command where DockerFile is present)
+>>>> docker build -t=vinsdocker/selenium .
+<vinsdocker/selenium> is an image name
+
+command for volume mapping
+>>>> docker run -it -v ${PWD}/results:/home/selenium-docker/test-output vinsdocker/selenium
+
+command to run the test inside docker container
+>>>> java -Dselenium.grid.enabled=true -Dselenium.grid.hub.host=10.118.83.14 -cp "libs/*" org.testng.TestNG -threadcount
+ 2 testng.xml
+
+docker command with entry point
+>>>>  docker run -e BROWSER=chrome -e HUB_HOST=192.168.0.101 -e THREAD_COUNT=2 -e TEST_SUITE=testng.xml -it -v ${PWD}/results:/home/selenium-docker/test-output vinsdocker/selenium
+
+command to use unused images
+>>>> docker system prune -f
+
+command to see the logs
+>>>docker compose logs <google-test>
+<google-test> is the test name
+
+if there is an entrypoint already defined and we want to get bash while running the docker container in interacting mode
+>>>> docker run -it --entrypoint=/bin/sh vinsdocker/selenium
+
+command to run thr grid first and execute test
+>>>> docker-compose -f grid.yaml up --scale chrome=2 -d
+>>>> BROWSER=chrome docker-compose up

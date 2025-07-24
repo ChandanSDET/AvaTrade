@@ -9,14 +9,15 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <package.directory>${project.build.directory}/docker-resources</package.directory>
     </properties>
     <dependencies>
        <dependency>
            <groupId>org.seleniumhq.selenium</groupId>
            <artifactId>selenium-java</artifactId>
-           <version>4.1.2</version>
+           <version>4.32.0</version>
         </dependency>
         <dependency>
             <groupId>com.github.javafaker</groupId>
@@ -28,10 +29,164 @@
             <artifactId>testng</artifactId>
             <version>7.5</version>
         </dependency>
+<!--      <dependency>-->
+<!--        <groupId>org.junit.jupiter</groupId>-->
+<!--        <artifactId>junit-jupiter-api</artifactId>-->
+<!--        <version>5.8.1</version>-->
+<!--        <scope>test</scope>-->
+<!--      </dependency>-->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>5.1.0</version>
         </dependency>
+        <dependency>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+          <version>1.18.24</version>
+          <scope>provided</scope>
+        </dependency>
+        <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+          <version>2.10.0.pr2</version>
+        </dependency>
+      <dependency>
+        <groupId>io.rest-assured</groupId>
+        <artifactId>rest-assured</artifactId>
+        <version>5.1.1</version>
+      </dependency>
+      <dependency>
+        <groupId>io.rest-assured</groupId>
+        <artifactId>json-path</artifactId>
+        <version>5.1.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.json</groupId>
+        <artifactId>json</artifactId>
+        <version>20220320</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi</artifactId>
+        <version>5.2.2</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+        <version>5.2.2</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.10.1</version>
+      </dependency>
+      <dependency>
+        <groupId>com.aventstack</groupId>
+        <artifactId>chaintest-testng</artifactId>
+        <version>1.0.12</version>
+      </dependency>
     </dependencies>
+  <build>
+    <finalName>selenium-docker</finalName>
+    <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.11.0</version> <!-- Latest stable as of 2025 -->
+          <configuration>
+            <source>17</source>
+            <target>17</target>
+          </configuration>
+        </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.1.2</version>
+        <configuration>
+          <systemPropertyVariables>
+<!--            <browser>chrome</browser>-->
+            <selenium.grid.enabled>true</selenium.grid.enabled>
+          </systemPropertyVariables>
+<!--          <includes>-->
+<!--            <include>**/*Test.java</include>-->
+<!--          </includes>-->
+          <suiteXmlFiles>
+            <suiteXmlFile>testng.xml</suiteXmlFile>
+          </suiteXmlFiles>
+          <parallel>tests</parallel> <!-- You can use classes or both -->
+          <threadCount>4</threadCount>
+<!--          <forkCount>1</forkCount>-->
+<!--          <reuseForks>true</reuseForks>-->
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.6.1</version>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${package.directory}/libs</outputDirectory>
+            </configuration>
+          </execution>
+        </executions><!-- Use latest stable -->
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <outputDirectory>${package.directory}/libs</outputDirectory>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>
+                test-jar
+              </goal>
+            </goals>
+            <configuration>
+              <include>**/*.class</include>
+            </configuration>
+          </execution>
+        </executions>
+        <!-- Use latest stable -->
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.3.1</version>
+        <executions>
+          <execution>
+            <id>copy-resources</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${package.directory}</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>src/test/resources</directory>
+                </resource>
+                <resource>
+                  <directory>.</directory>
+                  <includes>
+                    <include>testng.xml</include>
+                  </includes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
