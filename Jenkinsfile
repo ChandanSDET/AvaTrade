@@ -8,10 +8,6 @@ pipeline {
       }
     }
 
-    stage('Docker Login') {
-
-    }
-
     stage('Build Image') {
       steps {
         sh "docker build -t=krisuchotu/selenium ."
