@@ -43,6 +43,7 @@ class FloodFillWithStack {
 
     while (!stack.isEmpty()) {
       int[] current = stack.pop();
+      System.out.println(Arrays.toString(current));
       int row = current[0];
       int col = current[1];
 

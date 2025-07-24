@@ -1,4 +1,4 @@
-package Enums;
+package com.avatrade.enums;
 
 public enum DriverType {
     FIREFOX,

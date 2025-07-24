@@ -5,10 +5,12 @@ import com.avatrade.pages.DashboardPage;
 import com.avatrade.pages.LoginPage;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
+@Listeners(com.aventstack.chaintest.plugins.ChainTestListener.class)
 public class TestFavoriteDashboard extends BaseTest{
 
     LoginPage loginpage;

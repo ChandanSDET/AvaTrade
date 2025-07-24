@@ -40,8 +40,8 @@ class Executors{
   public static void main(String[] args) {
     ArrayList al = new ArrayList();
     al.add(new Students("Vijay",23));
-    al.add(new Students("Vijay",27));
-    al.add(new Students("Vijay",21));
+    al.add(new Students("Anuj",27));
+    al.add(new Students("Chandan",21));
     Collections.sort(al);
     System.out.println(al);
   }

@@ -4,7 +4,7 @@ public class LongestSumContiguousSubArray {
 
   static int maxSumSubArray(int a[])
   {
-    int maximum_sum = 0;
+    int maximum_sum = Integer.MIN_VALUE;
     int current_sum = 0;
     for(int i=0; i< a.length; i++)
     {
@@ -23,7 +23,7 @@ public class LongestSumContiguousSubArray {
   }
 
   public static void main(String[] args) {
-    int[] a = { -2, -3, 4, -1, -2, 1, 5, -3 };
+    int[] a = { -2, -2, 0, -1, 2 ,-1, 3};
     int max_sum = maxSumSubArray(a);
     System.out.printf("Maximum sum of the contiguous array is : %d", max_sum);
   }

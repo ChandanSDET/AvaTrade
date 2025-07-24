@@ -10,11 +10,12 @@ public class MaxProfitBySellingShare {
       int profit  = arr[i] - minPrice;
       maxProfit = Math.max(profit, maxProfit);
     }
+    System.out.println(minPrice);
     return maxProfit;
   }
 
   public static void main(String[] args) {
-    int arr[] = {7,6,4,3,1};
+    int arr[] = {400, 180, 260, 310, 40, 535, 695};
     int maxProfit = maxProfit(arr);
     System.out.println(maxProfit);
   }

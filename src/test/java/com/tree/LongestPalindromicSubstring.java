@@ -1,4 +1,5 @@
 package com.tree;
 
-public class LongestPalendromicSubstring {
+public class LongestPalindromicSubstring {
+
 }
