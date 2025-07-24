@@ -24,4 +24,10 @@ pipeline {
       }
     }
   }
+  post {
+      always {
+        sh 'docker logout'
+        echo 'Cleanup done'
+      }
+    }
 }
